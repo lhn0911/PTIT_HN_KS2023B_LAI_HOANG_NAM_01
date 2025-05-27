@@ -56,8 +56,8 @@ public class ProductDaoImp implements ProductDao {
                 product = new Product();
                 product.setProduct_id(rs.getInt("product_id"));
                 product.setProduct_name(rs.getString("product_name"));
-                product.setPrice(rs.getDouble("price"));
                 product.setDescription(rs.getString("description"));
+                product.setPrice(rs.getDouble("price"));
                 product.setImage_url(rs.getString("image"));
                 product.setStatus(rs.getBoolean("status"));
                 product.setCreated_at(rs.getDate("create_at").toLocalDate());
@@ -78,11 +78,12 @@ public class ProductDaoImp implements ProductDao {
 
         try {
             conn = ConnectionDB.openConnection();
-            callSt = conn.prepareCall("{call save_product(?, ?, ?, ?)}");
+            callSt = conn.prepareCall("{call save_product(?, ?, ?, ?, ?)}");
             callSt.setString(1, product.getProduct_name());
-            callSt.setDouble(2, product.getPrice());
-            callSt.setString(3, product.getDescription());
+            callSt.setString(2, product.getDescription());
+            callSt.setDouble(3, product.getPrice());
             callSt.setString(4, product.getImage_url());
+            callSt.setInt(5, product.getCategory_id());
             callSt.executeUpdate();
             return true;
         } catch (SQLException e) {
