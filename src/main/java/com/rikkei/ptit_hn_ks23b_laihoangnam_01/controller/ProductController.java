@@ -47,7 +47,7 @@ public class ProductController {
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         product.setImage_url(productDTO.getImage_url());
-        product.setCategory_id(productDTO.getCategory_id());gitr init
+        product.setCategory_id(productDTO.getCategory_id());
         productService.save(product);
 
         return "redirect:/products";
